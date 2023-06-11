@@ -1,0 +1,9 @@
+.film-list {
+  width: 100%;
+}
+.film-list thead tr td {
+  border-bottom: 1px solid lightgrey;
+}
+.film-list tbody tr td {
+  padding: 0.4rem 0;
+}
