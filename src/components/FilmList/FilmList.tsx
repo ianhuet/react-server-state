@@ -40,7 +40,7 @@ export function FilmList(props: Props) {
       </thead>
       <tbody>
         {films.map((film) => (
-          <tr key="film.episodeID">
+          <tr key={film.episodeID}>
             <td>{film.episodeID}</td>
             <td>{film.title}</td>
             <td>{film.releaseDate}</td>
