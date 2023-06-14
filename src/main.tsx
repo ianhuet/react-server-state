@@ -5,17 +5,18 @@ import App from './App.tsx'
 import './index.css'
 
 const cacheConfig = {
-  // typePolicies: {
-  //   allFilms: {
-  //     fields: {
-  //       name: {
-  //         read(name = "UNKNOWN NAME") {
-  //           return name;
-  //         }
-  //       },
-  //     },
-  //   },
-  // },
+  typePolicies: {
+    Film: {
+      fields: {
+        releaseDate: {
+          read(releaseDate: string): string {
+            const date = new Date(releaseDate);
+            return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+          }
+        },
+      },
+    },
+  },
 }
 
 const client = new ApolloClient({

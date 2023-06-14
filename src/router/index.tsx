@@ -4,8 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import { DetailView } from '../pages/DetailView';
-import { ListView } from '../pages/ListView';
+import { DetailView, ListView } from '../pages';
 
 export function Router() {
   return (

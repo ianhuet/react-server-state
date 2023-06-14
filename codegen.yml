@@ -6,6 +6,7 @@ generates:
     config:
       maybeValue: T
       useTypeImports: true
+    overwrite: true
     plugins: []
     preset: client
     presetConfig:

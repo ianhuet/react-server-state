@@ -1,8 +1,10 @@
 import { useApolloClient } from '@apollo/client';
 import { useParams } from "react-router-dom";
 
-import { Person } from '../../generated/graphql';
-import { fragments } from '../../queries';
+import { SidePanel } from '../../../../components';
+import { Person } from '../../../../generated/graphql';
+import { fragments } from '../../../../queries';
+import { utils } from '../../../../utils'
 
 import './Characters.css';
 
@@ -19,32 +21,22 @@ export function Characters() {
     return null;
   }
 
-  const sortedCharacters = () => {
-    const tmp = [...characters];
-    return tmp.sort((a,b) => {
-      if (a?.name > b?.name) return 1;
-      if (b?.name > a?.name) return -1;
-      return 0;
-    });
-  };
-
   const characterLabel = (character: Person): string => {
     const species = character?.species?.name ? ` (${character.species.name})` : '';
     return `${character.name} ${species}`;
   }
+
+  const getContents = () => {
+    const charactersSortedByName = utils.sortObjArray<Person>(characters, 'name')
+    return charactersSortedByName.reduce((acc, character) => {
+      if (!character) return acc
+
+      acc.push(<>{characterLabel(character)}</>)
+      return acc;
+    }, [])
+  }
   
   return (
-    <div className="characters">
-      <h3>Characters</h3>
-      <ul>
-        {sortedCharacters().map((character, index) => {
-          if (!character) return null;
-
-          return (
-            <li key={index}>{characterLabel(character)}</li>
-          );
-        })}
-      </ul>
-    </div>
+    <SidePanel title="Characters" contents={getContents()} />
   );
 }

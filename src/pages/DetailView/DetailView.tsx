@@ -1,9 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { Link, useParams } from "react-router-dom";
 
-import { Characters as CharactersPanel, Production as ProductionPanel } from '../components';
-// import type { Film } from '../generated/graphql';
-import { queries } from '../queries';
+import { Characters as CharactersPanel, Production as ProductionPanel } from './components';
+import { queries } from '../../queries';
 
 import './DetailView.css';
 

@@ -1,0 +1,25 @@
+.sidePanel {
+  background-color: lightgrey;
+  color: black;
+  padding: 1rem;
+  width: 200px;
+}
+
+.sidePanel__title {
+  border-bottom: 1px solid grey;
+  font-size: 11px;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  padding-bottom: 0.2rem;
+  text-transform: uppercase;  
+}
+
+.sidePanel__contents,
+.sidePanel__contents ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.sidePanel__contents ul {
+  padding-left: 0.4rem;
+}
