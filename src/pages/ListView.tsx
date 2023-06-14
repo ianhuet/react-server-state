@@ -16,5 +16,8 @@ export function ListView() {
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
-  return (<FilmList films={data.allFilms.films} />);
+  const films = data?.allFilms?.films;
+  if (!films) return 'No films found';
+
+  return (<FilmList films={films} />);
 }

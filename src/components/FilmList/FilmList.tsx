@@ -1,28 +1,10 @@
 import { Link } from "react-router-dom";
 
+import { Film } from '../../generated/graphql';
 import './FilmList.css';
 
-interface Film {
-  id: string;
-  title: string;
-  episodeID: number;
-  director: string;
-  producers: string[];
-  releaseDate: string;
-  openingCrawl: string;
-  characterConnection: {
-    totalCount: number;
-    characters: {
-      name: string;
-      species: {
-        name: string;
-      }
-    }
-  }
-}
-
 interface Props {
-  films: Film[];
+  films: (Film | null)[];
 }
 
 export function FilmList(props: Props) {
@@ -39,14 +21,18 @@ export function FilmList(props: Props) {
         </tr>
       </thead>
       <tbody>
-        {films.map((film) => (
-          <tr key={film.episodeID}>
-            <td>{film.episodeID}</td>
-            <td>{film.title}</td>
-            <td>{film.releaseDate}</td>
-            <td><Link to={`detail/${film.id}`}>Detail</Link></td>
-          </tr>    
-        ))}
+        {films.map((film) => {
+          if (film === null) return null;
+
+          return (
+            <tr key={film.episodeID}>
+              <td>{film.episodeID}</td>
+              <td>{film.title}</td>
+              <td>{film.releaseDate}</td>
+              <td><Link to={`detail/${film.id}`}>Detail</Link></td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

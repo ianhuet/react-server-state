@@ -1,20 +1,26 @@
-import type { Character } from '../queries/types';
+import { useApolloClient } from '@apollo/client';
+import { useParams } from "react-router-dom";
+
+import { Person } from '../../generated/graphql';
+import { fragments } from '../../queries';
 
 import './Characters.css';
 
-interface Props {
-  characters: Character[],
-}
+export function Characters() {
+  const { id } = useParams();
+  const client = useApolloClient();
+  const result = client.readFragment({
+    id: `Film:${id}`,
+    fragment: fragments.filmCharacters,
+  });
+  const characters = result?.characterConnection?.characters;
 
-export function Characters(props: Props) {
-  const { characters } = props;
+  if (!characters) {
+    return null;
+  }
 
-  const sortedCharacters = (characters) => {
-    if (!characters) {
-      return [];
-    }
-    
-    const tmp = [...props.characters];
+  const sortedCharacters = () => {
+    const tmp = [...characters];
     return tmp.sort((a,b) => {
       if (a?.name > b?.name) return 1;
       if (b?.name > a?.name) return -1;
@@ -22,7 +28,7 @@ export function Characters(props: Props) {
     });
   };
 
-  const characterLabel = (character): string => {
+  const characterLabel = (character: Person): string => {
     const species = character?.species?.name ? ` (${character.species.name})` : '';
     return `${character.name} ${species}`;
   }
@@ -31,9 +37,13 @@ export function Characters(props: Props) {
     <div className="characters">
       <h3>Characters</h3>
       <ul>
-        {sortedCharacters(characters).map((character, index) => (
-          <li key={index}>{characterLabel(character)}</li>
-        ))}
+        {sortedCharacters().map((character, index) => {
+          if (!character) return null;
+
+          return (
+            <li key={index}>{characterLabel(character)}</li>
+          );
+        })}
       </ul>
     </div>
   );

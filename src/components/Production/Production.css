@@ -2,6 +2,7 @@
   background-color: lightgrey;
   color: black;
   padding: 1rem;
+  width: 200px;
 }
 .production h3 {
   border-bottom: 1px solid grey;

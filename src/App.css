@@ -1,6 +1,9 @@
 #root {
   margin: 0 auto;
-  padding: 1rem;
+  min-width: 600px;
   text-align: left;
-  width: 540px;
+}
+
+h1, h5 {
+  margin: 0;
 }

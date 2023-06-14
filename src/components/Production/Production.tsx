@@ -1,12 +1,20 @@
-import type { Production } from '../../queries/types';
+import { useApolloClient } from '@apollo/client';
+import { useParams } from "react-router-dom";
+
+import { fragments } from '../../queries';
 import './Production.css';
 
-interface Props {
-  production: Production
-}
+export function Production() {
+  const { id } = useParams();
+  const client = useApolloClient();
+  const production = client.readFragment({
+    id: `Film:${id}`,
+    fragment: fragments.filmProduction,
+  });
 
-export function Production(props: Props) {
-  const { production } = props;
+  if (!production) {
+    return null;
+  }
 
   return (
     <div className="production">
@@ -16,7 +24,7 @@ export function Production(props: Props) {
         <li>Director: {production?.director}</li>
         <li>Producers:
           <ul>
-            {production.producers?.map((producer) => (
+            {production?.producers?.map((producer) => (
               <li key={producer}>{producer}</li>
             ))}
           </ul>

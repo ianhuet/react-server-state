@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { Link, useParams } from "react-router-dom";
 
 import { Characters as CharactersPanel, Production as ProductionPanel } from '../components';
+// import type { Film } from '../generated/graphql';
 import { queries } from '../queries';
 
 import './DetailView.css';
@@ -13,42 +14,23 @@ export function DetailView() {
     variables: { id },
   });
 
-  const film = data?.film ?? {};
-
-  const characters = () => {
-    if (!data.film) {
-      return [];
-    }
-
-    return data.film?.characterConnection?.characters;
-  };
-
-  const production = () => {
-    if (!data.film) {
-      return {};
-    }
-
-    return {
-      director: data.film.director,
-      producers: data.film.producers,
-      releaseDate: data.film.releaseDate,
-    };
-  };
-
   const renderDetail = () => {
     if (loading) return 'Loading...'
-    if (error) return `Error! ${error.message}`;
+    if (error) return `Error: ${error.message}!`;
+
+    const film = data?.film;
+    if (!film) return 'Film not found';
 
     return (
       <div>
         <h1>{film?.title}</h1>
-        <p>Episode #{film.episodeID}</p>
+        <h5>Episode #{film.episodeID}</h5>
 
         <div className="detail">
           <pre>{film?.openingCrawl}</pre>
           <aside>
-            <ProductionPanel production={production()} />
-            <CharactersPanel characters={characters()} />
+            <ProductionPanel />
+            <CharactersPanel />
           </aside>
         </div>
       </div>

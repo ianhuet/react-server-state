@@ -2,5 +2,11 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  padding-top: 1rem;
+  padding-top: 2rem;
+}
+
+.detail pre {
+  font-size: 20px;
+  margin-top: 0;
+  padding-right: 2rem;
 }

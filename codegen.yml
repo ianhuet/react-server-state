@@ -1,0 +1,14 @@
+documents:
+  - 'src/queries/*.ts'
+ignoreNoDocuments: true,
+generates:
+  ./src/generated/:
+    config:
+      maybeValue: T
+      useTypeImports: true
+    plugins: []
+    preset: client
+    presetConfig:
+      fragmentMasking: false
+      gqlTagName: 'gql'
+schema: 'https://swapi-graphql.netlify.app/.netlify/functions/index'
