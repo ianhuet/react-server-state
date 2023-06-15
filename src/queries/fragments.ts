@@ -13,6 +13,15 @@ const filmCharacters = gql(`
   }
 `);
 
+const filmMeta = gql(`
+  fragment FilmMeta on Film {
+    id
+    title
+    episodeID
+    releaseDate
+  }
+`);
+
 const filmProduction = gql(`
   fragment FilmProduction on Film {
     director
@@ -23,5 +32,6 @@ const filmProduction = gql(`
 
 export const fragments = {
   filmCharacters,
+  filmMeta,
   filmProduction,
 };

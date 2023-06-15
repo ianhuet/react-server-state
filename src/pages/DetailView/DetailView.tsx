@@ -1,37 +1,38 @@
 import { useQuery } from '@apollo/client';
-import { Link, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 
-import { Characters as CharactersPanel, Production as ProductionPanel } from './components';
+import { FilmMetaFragment } from '../../generated/graphql'
 import { queries } from '../../queries';
+import { Characters as CharactersPanel, Production as ProductionPanel } from './components';
 
 import './DetailView.css';
 
 export function DetailView() {
-  const { id } = useParams();
+  const cache: FilmMetaFragment = useLoaderData() as FilmMetaFragment;
 
+  const { id } = useParams();
   const { loading, error, data } = useQuery(queries.filmDetail, {
     variables: { id },
   });
+
+  const film = {
+    ...cache,
+    ...data?.film,
+  }
 
   const renderDetail = () => {
     if (loading) return 'Loading...'
     if (error) return `Error: ${error.message}!`;
 
-    const film = data?.film;
     if (!film) return 'Film not found';
 
     return (
-      <div>
-        <h1>{film?.title}</h1>
-        <h5>Episode #{film.episodeID}</h5>
-
-        <div className="detail">
-          <pre>{film?.openingCrawl}</pre>
-          <aside>
-            <ProductionPanel />
-            <CharactersPanel />
-          </aside>
-        </div>
+      <div className="detail">
+        <pre>{film?.openingCrawl}</pre>
+        <aside>
+          <ProductionPanel />
+          <CharactersPanel />
+        </aside>
       </div>
     );
   };
@@ -42,7 +43,12 @@ export function DetailView() {
 
       <hr/>
 
-      {renderDetail()}
+      <div>
+        <h1>{film?.title}</h1>
+        <h5>Episode #{film?.episodeID}</h5>
+
+        {renderDetail()}
+      </div>
     </div>
   );
 }

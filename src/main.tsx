@@ -11,7 +11,7 @@ const cacheConfig = {
         releaseDate: {
           read(releaseDate: string): string {
             const date = new Date(releaseDate);
-            return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            return `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`;
           }
         },
       },

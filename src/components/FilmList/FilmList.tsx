@@ -26,9 +26,9 @@ export function FilmList(props: Props) {
 
           return (
             <tr key={film.episodeID}>
-              <td>{film.episodeID}</td>
-              <td>{film.title}</td>
-              <td>{film.releaseDate}</td>
+              <td>{film?.episodeID}</td>
+              <td>{film?.title}</td>
+              <td>{film?.releaseDate}</td>
               <td><Link to={`detail/${film.id}`}>Detail</Link></td>
             </tr>
           );

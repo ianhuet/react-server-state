@@ -14,9 +14,10 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 const documents = {
     "\n  fragment FilmCharacters on Film {\n    characterConnection {\n      characters {\n        name\n        species {\n          name\n        }\n      }\n    }\n  }\n": types.FilmCharactersFragmentDoc,
+    "\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    releaseDate\n  }\n": types.FilmMetaFragmentDoc,
     "\n  fragment FilmProduction on Film {\n    director\n    producers\n    releaseDate\n  }\n": types.FilmProductionFragmentDoc,
-    "\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      id\n      title\n      episodeID\n      openingCrawl\n      ...FilmCharacters\n      ...FilmProduction\n    }\n  }\n": types.FilmDetailDocument,
-    "\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n": types.AllFilmsDocument,
+    "\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      openingCrawl\n      ...FilmMeta\n      ...FilmCharacters\n      ...FilmProduction\n    }\n  }\n": types.FilmDetailDocument,
+    "\n  query AllFilms {\n    allFilms {\n      films {\n        ...FilmMeta\n      }\n    }\n  }\n": types.AllFilmsDocument,
 };
 
 /**
@@ -40,15 +41,19 @@ export function gql(source: "\n  fragment FilmCharacters on Film {\n    characte
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    releaseDate\n  }\n"): (typeof documents)["\n  fragment FilmMeta on Film {\n    id\n    title\n    episodeID\n    releaseDate\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  fragment FilmProduction on Film {\n    director\n    producers\n    releaseDate\n  }\n"): (typeof documents)["\n  fragment FilmProduction on Film {\n    director\n    producers\n    releaseDate\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      id\n      title\n      episodeID\n      openingCrawl\n      ...FilmCharacters\n      ...FilmProduction\n    }\n  }\n"): (typeof documents)["\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      id\n      title\n      episodeID\n      openingCrawl\n      ...FilmCharacters\n      ...FilmProduction\n    }\n  }\n"];
+export function gql(source: "\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      openingCrawl\n      ...FilmMeta\n      ...FilmCharacters\n      ...FilmProduction\n    }\n  }\n"): (typeof documents)["\n  query FilmDetail($id: ID) {\n    film(id: $id) {\n      openingCrawl\n      ...FilmMeta\n      ...FilmCharacters\n      ...FilmProduction\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n"): (typeof documents)["\n  query AllFilms {\n    allFilms {\n      films {\n        id\n        title\n        episodeID\n        releaseDate\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query AllFilms {\n    allFilms {\n      films {\n        ...FilmMeta\n      }\n    }\n  }\n"): (typeof documents)["\n  query AllFilms {\n    allFilms {\n      films {\n        ...FilmMeta\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
