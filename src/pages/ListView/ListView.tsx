@@ -1,9 +1,7 @@
 import { useQuery } from '@apollo/client'
 
 import { FilmList } from '../../components'
-import { Film } from '../../generated/graphql';
 import { queries } from '../../queries'
-import { utils } from '../../utils'
 
 <template>
   <main>

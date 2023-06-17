@@ -2,6 +2,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import ReactDOM from 'react-dom/client'
 
 import App from './App.tsx'
+import { utils } from './utils'
+
 import './index.css'
 
 const cacheConfig = {
@@ -13,6 +15,11 @@ const cacheConfig = {
             const date = new Date(releaseDate);
             return `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`;
           }
+        },
+        episodeIdNumeral: {
+          read(_value: string, { readField }) {
+            return utils.romanise(readField('episodeID'))
+          },  
         },
       },
     },

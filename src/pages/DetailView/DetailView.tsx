@@ -20,6 +20,8 @@ export function DetailView() {
     ...data?.film,
   }
 
+  
+
   const renderDetail = () => {
     if (loading) return 'Loading...'
     if (error) return `Error: ${error.message}!`;
@@ -45,7 +47,7 @@ export function DetailView() {
 
       <div>
         <h1>{film?.title}</h1>
-        <h5>Episode #{film?.episodeID}</h5>
+        <h5>Episode {film?.episodeIdNumeral}</h5>
 
         {renderDetail()}
       </div>

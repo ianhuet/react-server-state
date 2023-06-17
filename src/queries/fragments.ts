@@ -18,6 +18,7 @@ const filmMeta = gql(`
     id
     title
     episodeID
+    episodeIdNumeral @client
     releaseDate
   }
 `);

@@ -12,4 +12,5 @@ generates:
     presetConfig:
       fragmentMasking: false
       gqlTagName: 'gql'
+    schema: './schema.local.graphql'
 schema: 'https://swapi-graphql.netlify.app/.netlify/functions/index'
