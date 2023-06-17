@@ -1,15 +1,21 @@
+import { useApolloClient } from '@apollo/client';
 import { Link } from "react-router-dom";
 
 import { Film } from '../../generated/graphql';
+import { queries } from '../../queries'
+import { utils } from '../../utils'
 import './FilmList.css';
 
-interface Props {
-  films: (Film | null)[];
-}
+export function FilmList() {
+  const client = useApolloClient();
+  const result = client.readQuery({
+    query: queries.listFilms,
+  });
 
-export function FilmList(props: Props) {
-  const { films } = props;
+  const films = result?.allFilms?.films
+  if (!films) return 'No films found'
 
+  const filmsSortedByEpisodeId = utils.sortObjArray<Film>(films, 'episodeID')
   return (
     <table className="film-list">
       <thead>
@@ -21,7 +27,7 @@ export function FilmList(props: Props) {
         </tr>
       </thead>
       <tbody>
-        {films.map((film) => {
+        {filmsSortedByEpisodeId.map((film) => {
           if (film === null) return null;
 
           return (

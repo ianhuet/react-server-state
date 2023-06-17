@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 import { SidePanel } from '../../../../components';
 import { fragments } from '../../../../queries';
-import './Production.css';
 
 export function Production() {
   const { id } = useParams();

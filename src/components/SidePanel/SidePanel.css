@@ -1,6 +1,7 @@
 .sidePanel {
   background-color: lightgrey;
   color: black;
+  margin-bottom: 1rem;
   padding: 1rem;
   width: 200px;
 }

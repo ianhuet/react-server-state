@@ -13,14 +13,10 @@ import { utils } from '../../utils'
 </template>
 
 export function ListView() {
-  const { loading, error, data } = useQuery(queries.listFilms)
+  const { loading, error } = useQuery(queries.listFilms)
 
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
 
-  const films = data?.allFilms?.films
-  if (!films) return 'No films found'
-
-  const filmsSortedByEpisodeId = utils.sortObjArray<Film>(films, 'episodeID')
-  return (<FilmList films={filmsSortedByEpisodeId} />)
+  return (<FilmList />)
 }

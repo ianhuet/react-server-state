@@ -11,11 +11,11 @@ import './Characters.css';
 export function Characters() {
   const { id } = useParams();
   const client = useApolloClient();
-  const result = client.readFragment({
+  const cache = client.readFragment({
     id: `Film:${id}`,
     fragment: fragments.filmCharacters,
   });
-  const characters = result?.characterConnection?.characters;
+  const characters = cache?.characterConnection?.characters;
 
   if (!characters) {
     return null;
