@@ -1,0 +1,9 @@
+.characterNav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.characterNav li {
+  display: inline-block;
+  margin-right: 12px;
+}

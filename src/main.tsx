@@ -17,8 +17,9 @@ const cacheConfig = {
           }
         },
         episodeIdNumeral: {
-          read(_value: string, { readField }) {
-            return utils.romanise(readField('episodeID'))
+          read(_value: string, cache) {
+            const episodeId: number = cache.readField('episodeID')
+            return utils.romanise(episodeId)
           },  
         },
       },

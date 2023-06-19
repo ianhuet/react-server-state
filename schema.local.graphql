@@ -3,11 +3,6 @@
 # see: https://www.apollographql.com/docs/react/local-state/managing-state-with-field-policies/
 directive @client on FIELD
 
-type LocalStateType {
-  companyId: String
-  contactId: String
-}
-
 extend type Film {
   episodeIdNumeral: String
 }

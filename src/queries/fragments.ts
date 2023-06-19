@@ -4,10 +4,22 @@ const filmCharacters = gql(`
   fragment FilmCharacters on Film {
     characterConnection {
       characters {
+        id
         name
+        height
+        mass
         species {
           name
         }
+        homeworld {
+          name
+        }
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasPreviousPage
+        hasNextPage
       }
     }
   }
@@ -23,6 +35,18 @@ const filmMeta = gql(`
   }
 `);
 
+const filmPlanets = gql(`
+  fragment FilmPlanets on Film {
+    planetConnection {
+      planets {
+        name
+        terrains
+        climates
+      }
+    }
+  }
+`);
+
 const filmProduction = gql(`
   fragment FilmProduction on Film {
     director
@@ -34,5 +58,6 @@ const filmProduction = gql(`
 export const fragments = {
   filmCharacters,
   filmMeta,
+  filmPlanets,
   filmProduction,
 };

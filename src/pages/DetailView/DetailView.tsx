@@ -3,7 +3,7 @@ import { Link, useLoaderData, useParams } from "react-router-dom";
 
 import { FilmMetaFragment } from '../../generated/graphql'
 import { queries } from '../../queries';
-import { Characters as CharactersPanel, Production as ProductionPanel } from './components';
+import { Characters, Planets, Production } from '../../components';
 
 import './DetailView.css';
 
@@ -20,8 +20,6 @@ export function DetailView() {
     ...data?.film,
   }
 
-  
-
   const renderDetail = () => {
     if (loading) return 'Loading...'
     if (error) return `Error: ${error.message}!`;
@@ -32,8 +30,8 @@ export function DetailView() {
       <div className="detail">
         <pre>{film?.openingCrawl}</pre>
         <aside>
-          <ProductionPanel />
-          <CharactersPanel />
+          <Production />
+          <Planets />
         </aside>
       </div>
     );
@@ -50,6 +48,8 @@ export function DetailView() {
         <h5>Episode {film?.episodeIdNumeral}</h5>
 
         {renderDetail()}
+
+        <Characters />
       </div>
     </div>
   );

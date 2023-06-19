@@ -6,6 +6,7 @@ const filmDetail = gql(`
       openingCrawl
       ...FilmMeta
       ...FilmCharacters
+      ...FilmPlanets
       ...FilmProduction
     }
   }

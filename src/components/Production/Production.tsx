@@ -1,8 +1,8 @@
 import { useApolloClient } from '@apollo/client';
 import { useParams } from "react-router-dom";
 
-import { SidePanel } from '../../../../components';
-import { fragments } from '../../../../queries';
+import { SidePanel } from '../../components';
+import { fragments } from '../../queries';
 
 export function Production() {
   const { id } = useParams();
